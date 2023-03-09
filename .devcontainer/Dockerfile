@@ -6,16 +6,16 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 # ** [Optional] Uncomment this section to install additional packages. **
 USER root
 
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -yq && apt-get install -yq default-jdk
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -yq && apt-get install -yq default-jdk && apt install clang -yq && apt install cmake -yq && apt install ninja-build -yq && apt install pkg-config -yq
 
 USER vscode
 
 RUN mkdir /home/vscode/opt && cd /home/vscode/opt && git clone https://github.com/flutter/flutter.git -b stable && \
-    wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip && \
-    unzip commandlinetools-linux-8512546_latest.zip && \
+    wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip && \
+    unzip commandlinetools-linux-9477386_latest.zip && \
     mkdir android-sdk && mkdir android-sdk/platform-tools && mkdir android-sdk/cmdline-tools && \
     mv cmdline-tools android-sdk/cmdline-tools/latest && \
-    rm commandlinetools-linux-8512546_latest.zip
+    rm commandlinetools-linux-9477386_latest.zip
 
 ENV PATH $PATH:/home/vscode/opt/flutter/bin
 ENV ANDROID_SDK_ROOT /home/vscode/opt/android-sdk
